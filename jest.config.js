@@ -1,11 +1,4 @@
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
-import type { Config } from 'jest';
-
-const config: Config = {
+export default {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
@@ -17,5 +10,3 @@ const config: Config = {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.app.json' }],
   },
 };
-
-export default config;
