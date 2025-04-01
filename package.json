@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "test": "jest",
+    "test": "jest ./src/**/*.test.ts",
     "prepare": "husky"
   },
   "lint-staged": {
