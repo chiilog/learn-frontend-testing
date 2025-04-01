@@ -10,14 +10,14 @@
     "lint:fix": "eslint --fix",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "test": "jest ./src/**/*.test.ts",
+    "test": "jest",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "npm run format",
       "npm run lint:fix",
-      "npm run test"
+      "npm run test -- ./src/"
     ]
   },
   "dependencies": {
