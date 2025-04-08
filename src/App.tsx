@@ -1,10 +1,11 @@
 import './App.css';
-import UserInfo from './components/04-user-info/UserInfo';
+import ToggleMessage from './components/05-toggle/ToggleMessage';
 
 function App() {
   return (
     <>
-      <UserInfo />
+      <ToggleMessage text="こんにちは" />
+      <ToggleMessage />
     </>
   );
 }
