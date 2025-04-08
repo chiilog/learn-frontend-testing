@@ -28,7 +28,7 @@ describe('ToggleMessage', () => {
 
     // Assert
     expect(message).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '隠す' })).toBeInTheDocument();
+    expect(button.textContent).toBe('隠す');
   });
 
   it('テキストがないときはdisabledになっている', () => {
