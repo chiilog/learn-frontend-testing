@@ -1,11 +1,10 @@
 import './App.css';
-import ToggleMessage from './components/05-toggle/ToggleMessage';
+import NameForm from './components/06-name-form/NameForm';
 
 function App() {
   return (
     <>
-      <ToggleMessage text="こんにちは" />
-      <ToggleMessage />
+      <NameForm />
     </>
   );
 }
