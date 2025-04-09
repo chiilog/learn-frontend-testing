@@ -12,6 +12,11 @@ type NameFormProps = {
 export default function NameForm({ onSubmit }: NameFormProps) {
   const [username, setUsername] = useState('');
 
+  const handleSubmit = () => {
+    onSubmit();
+    setUsername('');
+  };
+
   return (
     <>
       <div className="w-1/3 mx-auto">
@@ -26,11 +31,7 @@ export default function NameForm({ onSubmit }: NameFormProps) {
               onChange={(e) => setUsername(e.target.value)}
             />
           </FormItem>
-          <Button
-            type="button"
-            disabled={!username ? true : false}
-            onClick={() => onSubmit()}
-          >
+          <Button type="button" disabled={!username} onClick={handleSubmit}>
             送信
           </Button>
         </form>

@@ -46,7 +46,7 @@ describe('NameForm', () => {
     expect(button).toBeEnabled();
   });
 
-  it('入力後にボタンをクリックしするとonSubmitが呼ばれる', async () => {
+  it('送信後、入力欄が空になる', async () => {
     // Arrange
     render(<NameForm onSubmit={mockCallback} />);
 
@@ -58,5 +58,6 @@ describe('NameForm', () => {
 
     // Assert
     expect(mockCallback).toHaveBeenCalled();
+    expect(input).toHaveValue('');
   });
 });
