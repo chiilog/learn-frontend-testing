@@ -3,7 +3,7 @@ export default {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
   // The test environment that will be used for testing
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
 
   // A map from regular expressions to paths to transformers
   transform: {
