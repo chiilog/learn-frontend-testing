@@ -1,10 +1,14 @@
 import './App.css';
-import NameForm from './components/06-name-form/NameForm';
+import Greeter from './components/07-greeter/Greeter';
 
 function App() {
   return (
     <>
-      <NameForm />
+      <Greeter
+        onGreet={() => {
+          console.log('Hello');
+        }}
+      />
     </>
   );
 }
