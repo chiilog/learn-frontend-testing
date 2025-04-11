@@ -1,13 +1,10 @@
 import './App.css';
-import Greeter from './components/07-greeter/Greeter';
-
+import UserFetcher from './components/08-user-fetcher/UserFetcher';
 function App() {
   return (
     <>
-      <Greeter
-        onGreet={() => {
-          console.log('Hello');
-        }}
+      <UserFetcher
+        fetchUser={() => Promise.resolve(['John Doe', 'Jane Doe'])}
       />
     </>
   );
