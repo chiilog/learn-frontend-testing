@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+
 import { Button } from '@/components/ui/button';
 import { useTodoContext } from './useTodoContext';
+import { Todo } from './TodoContext';
 
-export default function TodoList() {
+type TodoListProps = {
+  initialTodos?: Todo[];
+};
+
+export default function TodoList({ initialTodos }: TodoListProps) {
   const { todos, setTodos } = useTodoContext();
+
+  // initialTodosが渡された場合、それを使用する
+  useEffect(() => {
+    if (initialTodos) {
+      setTodos(initialTodos);
+    }
+  }, [initialTodos, setTodos]);
 
   return (
     <>

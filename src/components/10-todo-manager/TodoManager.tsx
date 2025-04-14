@@ -3,9 +3,14 @@ import { Button } from '@/components/ui/button';
 import { useTodoContext } from './useTodoContext';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
+import { Todo } from './TodoContext';
 
-export default function TodoManager() {
-  const { setFilter } = useTodoContext();
+type TodoManagerProps = {
+  initialTodos?: Todo[];
+};
+
+export default function TodoManager({ initialTodos }: TodoManagerProps) {
+  const { filter, setFilter } = useTodoContext();
 
   return (
     <div className="max-w-md mx-auto">
@@ -16,18 +21,30 @@ export default function TodoManager() {
 
         <div className="flex gap-2 items-center mb-5">
           <p className="text-sm font-bold">フィルター:</p>
-          <Button variant="link" onClick={() => setFilter('all')}>
+          <Button
+            variant="link"
+            onClick={() => setFilter('all')}
+            className={filter === 'all' ? 'text-blue-500' : ''}
+          >
             すべて
           </Button>
-          <Button variant="link" onClick={() => setFilter('active')}>
+          <Button
+            variant="link"
+            onClick={() => setFilter('active')}
+            className={filter === 'active' ? 'text-blue-500' : ''}
+          >
             未完了のみ
           </Button>
-          <Button variant="link" onClick={() => setFilter('completed')}>
+          <Button
+            variant="link"
+            onClick={() => setFilter('completed')}
+            className={filter === 'completed' ? 'text-blue-500' : ''}
+          >
             完了のみ
           </Button>
         </div>
 
-        <TodoList />
+        <TodoList initialTodos={initialTodos} />
       </div>
     </div>
   );
