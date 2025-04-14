@@ -12,10 +12,14 @@ export default function TodoInput() {
   const [todo, setTodo] = useState({ todo: '', status: 'active' });
 
   const addTodo = () => {
-    if (todo.todo.trim() !== '') {
-      setTodos([...todos, todo]);
-      setTodo({ todo: '', status: 'active' });
+    if (todo.todo.trim() === '') {
+      return;
     }
+    if (todos.some((t) => t.todo === todo.todo)) {
+      return;
+    }
+    setTodos([...todos, todo]);
+    setTodo({ todo: '', status: 'active' });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

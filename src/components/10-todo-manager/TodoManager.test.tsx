@@ -81,6 +81,23 @@ describe('TodoManager', () => {
     expect(screen.getByText('洗濯をする')).toBeInTheDocument();
   });
 
+  it('同じTodoは登録しない', async () => {
+    // Arrange
+    render(
+      <TodoProvider>
+        <TodoManager />
+      </TodoProvider>
+    );
+    const formInput = screen.getByLabelText('TODO');
+
+    // Act
+    await userEvent.type(formInput, '洗濯をする{Enter}');
+    await userEvent.type(formInput, '洗濯をする{Enter}');
+
+    // Assert
+    expect(await screen.findAllByText('洗濯をする')).toHaveLength(1);
+  });
+
   it('TODOを入力してEnterキーを押すと、TODOリストに追加される', async () => {
     // Arrange
     render(
