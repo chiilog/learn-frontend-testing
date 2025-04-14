@@ -1,16 +1,12 @@
 import './App.css';
-import { ArticleLoader } from './components/09-article-loader/ArticleLoader';
-
+import { TodoProvider } from './components/10-todo-manager/TodoProvider';
+import TodoManager from './components/10-todo-manager/TodoManager';
 function App() {
-  const fetchArticles = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const articles = await response.json();
-    return articles;
-  };
-
   return (
     <>
-      <ArticleLoader fetchArticles={fetchArticles} />
+      <TodoProvider>
+        <TodoManager />
+      </TodoProvider>
     </>
   );
 }
