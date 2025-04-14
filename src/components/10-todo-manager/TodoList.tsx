@@ -14,14 +14,14 @@ export default function TodoList() {
                 <div className="flex flex-col gap-2 text-left">
                   <span className="text-lg font-bold">{todo.todo}</span>
                   <span className="text-sm text-gray-500">
-                    ステータス：{todo.status}
+                    ステータス：{todo.status === 'active' ? '未完了' : '完了'}
                   </span>
                 </div>
                 <Button
                   variant="outline"
                   onClick={() => {
                     const newStatus =
-                      todo.status === '未完了' ? '完了' : '未完了';
+                      todo.status === 'active' ? 'completed' : 'active';
                     setTodos(
                       todos.map((t) =>
                         t.todo === todo.todo ? { ...t, status: newStatus } : t
@@ -29,7 +29,7 @@ export default function TodoList() {
                     );
                   }}
                 >
-                  {todo.status === '未完了' ? '完了' : '未完了に戻す'}
+                  {todo.status === 'active' ? '完了' : '未完了に戻す'}
                 </Button>
               </div>
             </li>

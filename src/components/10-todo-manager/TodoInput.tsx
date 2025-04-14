@@ -9,12 +9,12 @@ import { useTodoContext } from './useTodoContext';
 
 export default function TodoInput() {
   const { todos, setTodos } = useTodoContext();
-  const [todo, setTodo] = useState({ todo: '', status: '未完了' });
+  const [todo, setTodo] = useState({ todo: '', status: 'active' });
 
   const addTodo = () => {
     if (todo.todo.trim() !== '') {
       setTodos([...todos, todo]);
-      setTodo({ todo: '', status: '未完了' });
+      setTodo({ todo: '', status: 'active' });
     }
   };
 
