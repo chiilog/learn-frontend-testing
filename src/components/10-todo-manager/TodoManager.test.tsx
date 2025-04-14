@@ -118,17 +118,17 @@ describe('TodoManager', () => {
     // Arrange
     render(
       <TodoProvider>
-        <TodoManager />
+        <TodoManager
+          initialTodos={[{ todo: '洗濯をする', status: 'active' }]}
+        />
       </TodoProvider>
     );
-    const formInput = screen.getByLabelText('TODO');
-
-    // Act
-    await userEvent.type(formInput, '洗濯をする{Enter}');
-    const todo = await screen.findByText('洗濯をする');
+    const todo = screen.getByText('洗濯をする');
     const completeButton = within(todo.closest('li')!).getByRole('button', {
       name: '完了',
     });
+
+    // Act
     await userEvent.click(completeButton);
 
     // Assert
@@ -139,17 +139,17 @@ describe('TodoManager', () => {
     // Arrange
     render(
       <TodoProvider>
-        <TodoManager />
+        <TodoManager
+          initialTodos={[{ todo: '洗濯をする', status: 'active' }]}
+        />
       </TodoProvider>
     );
-    const formInput = screen.getByLabelText('TODO');
-
-    // Act
-    await userEvent.type(formInput, '洗濯をする{Enter}');
-    const todo = await screen.findByText('洗濯をする');
+    const todo = screen.getByText('洗濯をする');
     const completeButton = within(todo.closest('li')!).getByRole('button', {
       name: '完了',
     });
+
+    // Act
     await userEvent.click(completeButton);
     const undoButton = within(todo.closest('li')!).getByRole('button', {
       name: '未完了に戻す',
