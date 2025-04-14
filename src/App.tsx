@@ -1,11 +1,16 @@
 import './App.css';
-import UserFetcher from './components/08-user-fetcher/UserFetcher';
+import { ArticleLoader } from './components/09-article-loader/ArticleLoader';
+
 function App() {
+  const fetchArticles = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const articles = await response.json();
+    return articles;
+  };
+
   return (
     <>
-      <UserFetcher
-        fetchUser={() => Promise.resolve(['John Doe', 'Jane Doe'])}
-      />
+      <ArticleLoader fetchArticles={fetchArticles} />
     </>
   );
 }
