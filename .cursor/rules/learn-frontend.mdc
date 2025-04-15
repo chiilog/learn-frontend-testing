@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# テスト設計ルール（Jest + Testing Library）
+
+- Arrange → Act → Assert（AAAパターン）で書く
+- describe 内に test/it をネストする
+- テスト名は「状態＋操作＋結果」で記述する
+- userEvent や waitFor は非同期処理に合わせて使う
+- getByRole > getByLabelText > getByText の順でクエリを選ぶ
+- queryBy は「存在しないこと」の確認用
+- getByTestId の使用は最終手段とする
+- モック関数は意味のある名前をつける（例：fetchUserMock）
+- テストには console.log を残さない
+- 不要な expect の羅列は避ける
+- 複雑な UI 状態は describe 単位で整理する
+- テストは読みやすさと意図の明確さを重視する
