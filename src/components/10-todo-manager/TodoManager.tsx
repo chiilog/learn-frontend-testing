@@ -12,6 +12,10 @@ type TodoManagerProps = {
 export default function TodoManager({ initialTodos }: TodoManagerProps) {
   const { filter, setFilter } = useTodoContext();
 
+  const handleFilter = (status: string) => {
+    setFilter(status);
+  };
+
   return (
     <div className="max-w-md mx-auto">
       <TodoInput />
@@ -23,21 +27,21 @@ export default function TodoManager({ initialTodos }: TodoManagerProps) {
           <p className="text-sm font-bold">フィルター:</p>
           <Button
             variant="link"
-            onClick={() => setFilter('all')}
+            onClick={() => handleFilter('all')}
             className={filter === 'all' ? 'text-blue-500' : ''}
           >
             すべて
           </Button>
           <Button
             variant="link"
-            onClick={() => setFilter('active')}
+            onClick={() => handleFilter('active')}
             className={filter === 'active' ? 'text-blue-500' : ''}
           >
             未完了のみ
           </Button>
           <Button
             variant="link"
-            onClick={() => setFilter('completed')}
+            onClick={() => handleFilter('completed')}
             className={filter === 'completed' ? 'text-blue-500' : ''}
           >
             完了のみ

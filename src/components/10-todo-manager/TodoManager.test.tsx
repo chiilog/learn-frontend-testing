@@ -159,4 +159,76 @@ describe('TodoManager', () => {
     // Assert
     expect(await screen.findByText('ステータス：未完了')).toBeInTheDocument();
   });
+
+  it('フィルターがすべての場合、すべてのTODOが表示される', async () => {
+    // Arrange
+    render(
+      <TodoProvider>
+        <TodoManager
+          initialTodos={[
+            { todo: '洗濯をする', status: 'active' },
+            { todo: '掃除をする', status: 'completed' },
+            { todo: '買い物をする', status: 'active' },
+          ]}
+        />
+      </TodoProvider>
+    );
+
+    // Act
+    const filterButton = screen.getByRole('button', { name: 'すべて' });
+    await userEvent.click(filterButton);
+
+    // Assert
+    expect(screen.getByText('洗濯をする')).toBeInTheDocument();
+    expect(screen.getByText('掃除をする')).toBeInTheDocument();
+    expect(screen.getByText('買い物をする')).toBeInTheDocument();
+  });
+
+  it('フィルターが未完了のみの場合、未完了のTODOが表示される', async () => {
+    // Arrange
+    render(
+      <TodoProvider>
+        <TodoManager
+          initialTodos={[
+            { todo: '洗濯をする', status: 'active' },
+            { todo: '掃除をする', status: 'completed' },
+            { todo: '買い物をする', status: 'active' },
+          ]}
+        />
+      </TodoProvider>
+    );
+
+    // Act
+    const filterButton = screen.getByRole('button', { name: '未完了のみ' });
+    await userEvent.click(filterButton);
+
+    // Assert
+    expect(await screen.findByText('洗濯をする')).toBeInTheDocument();
+    expect(screen.queryByText('掃除をする')).not.toBeInTheDocument();
+    expect(await screen.findByText('買い物をする')).toBeInTheDocument();
+  });
+
+  it('フィルターが完了の場合、完了のTODOが表示される', async () => {
+    // Arrange
+    render(
+      <TodoProvider>
+        <TodoManager
+          initialTodos={[
+            { todo: '洗濯をする', status: 'active' },
+            { todo: '掃除をする', status: 'completed' },
+            { todo: '買い物をする', status: 'active' },
+          ]}
+        />
+      </TodoProvider>
+    );
+
+    // Act
+    const filterButton = screen.getByRole('button', { name: '完了のみ' });
+    await userEvent.click(filterButton);
+
+    // Assert
+    expect(screen.queryByText('洗濯をする')).not.toBeInTheDocument();
+    expect(await screen.findByText('掃除をする')).toBeInTheDocument();
+    expect(screen.queryByText('買い物をする')).not.toBeInTheDocument();
+  });
 });
