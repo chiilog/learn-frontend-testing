@@ -1,12 +1,13 @@
 import './App.css';
-import { TodoProvider } from './components/10-todo-manager/TodoProvider';
-import TodoManager from './components/10-todo-manager/TodoManager';
+import { StepProvider } from './components/11-step-form/StepProvider';
+import StepForm from './components/11-step-form/StepForm';
+
 function App() {
   return (
     <>
-      <TodoProvider>
-        <TodoManager />
-      </TodoProvider>
+      <StepProvider>
+        <StepForm />
+      </StepProvider>
     </>
   );
 }
