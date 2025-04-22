@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '../ui/button';
 import { useStepContext } from './useStepContext';
 
@@ -7,6 +8,7 @@ export default function FormConfirm({
   onSubmit: (data: { name: string }) => Promise<void>;
 }) {
   const { name, setCurrentStep, error, setError } = useStepContext();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleBack = () => {
     setCurrentStep('input');
@@ -16,10 +18,13 @@ export default function FormConfirm({
     e.preventDefault();
 
     try {
+      setIsSubmitting(true);
       await onSubmit({ name });
       setCurrentStep('complete');
     } catch {
       setError('送信に失敗しました');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -37,7 +42,9 @@ export default function FormConfirm({
           <Button type="button" variant="outline" onClick={handleBack}>
             戻る
           </Button>
-          <Button type="submit">送信</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            送信
+          </Button>
         </div>
 
         {error && <p className="text-red-500">{error}</p>}

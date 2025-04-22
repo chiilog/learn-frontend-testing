@@ -132,7 +132,7 @@ describe('StepForm', () => {
       await user.click(nextButton);
 
       const submitButton = screen.getByRole('button', { name: '送信' });
-      user.click(submitButton);
+      await user.click(submitButton);
 
       // Assert
       await waitFor(() => {
@@ -140,6 +140,36 @@ describe('StepForm', () => {
       });
 
       expect(await screen.findByText('送信に失敗しました')).toBeInTheDocument();
+    });
+
+    it('送信中は送信ボタンが無効化されている', async () => {
+      // Arrange
+      const user = userEvent.setup();
+      mockOnSubmit.mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve('山田太郎');
+            }, 2000);
+          })
+      );
+      render(
+        <StepProvider>
+          <StepForm onSubmit={mockOnSubmit} />
+        </StepProvider>
+      );
+      const nameInput = screen.getByRole('textbox', { name: '名前' });
+      const nextButton = screen.getByRole('button', { name: '次へ' });
+
+      // Act
+      await user.type(nameInput, '山田太郎');
+      await user.click(nextButton);
+
+      const submitButton = screen.getByRole('button', { name: '送信' });
+      await user.click(submitButton);
+
+      // Assert
+      expect(submitButton).toBeDisabled();
     });
   });
 });
