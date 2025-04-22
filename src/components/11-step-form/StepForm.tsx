@@ -3,11 +3,11 @@ import FormConfirm from './FormConfirm';
 import FormComplete from './FormComplete';
 import { useStepContext } from './useStepContext';
 
-export default function StepForm() {
+export default function StepForm({ onSubmit }: { onSubmit: () => void }) {
   const { currentStep } = useStepContext();
 
   if (currentStep === 'confirm') {
-    return <FormConfirm />;
+    return <FormConfirm onSubmit={onSubmit} />;
   }
 
   if (currentStep === 'complete') {
